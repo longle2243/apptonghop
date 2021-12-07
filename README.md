@@ -1,3 +1,3 @@
 ## Giao diện trang đăng ký
 
-![dangky](dangky.png =250x)
+<img src="dangky.png" width="200">

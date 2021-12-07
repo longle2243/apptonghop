@@ -1,41 +1,51 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
-const LotsOfStyles = () => {
+import { SafeAreaView, StyleSheet, TextInput,Button,Text } from 'react-native';
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleLogin}>Register page</Text>
-      <TextInput style={styles.textInput} placeholder="Họ tên" />
-      <TextInput style={styles.textInput} placeholder="Địa chỉ email" />
-      <TextInput style={styles.textInput} placeholder="Mật khẩu" />
-      <TextInput style={styles.textInput} placeholder="Nhập lại mật khẩu" />
-      <Button
-        title="Đăng ký"
-        backgroundColor="blue"
-        onPress={() => alert('Đăng ký thành công')}
+
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.titleLogin}>log in</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="nhap ten"
       />
-    </View>
+      <TextInput
+        style={styles.input} 
+        placeholder="nhap mat khau"
+      />
+      <Button
+        title="Đăng nhập"
+        backgroundColor="blue"
+        onPress={() => alert('Đăng nhập thành công')}
+      />
+    </SafeAreaView>
   );
-};
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    
   },
   titleLogin: {
     color: 'blue',
     fontSize: 25,
     fontWeight: 'bold',
-    backgroundColor: 'yellow',
-    marginBottom: 30,
+    marginTop: 20,
+    marginBottom: 20,
   },
-  textInput: {
-    borderColor: 'grey',
+  input: {
+    height: 30,
+    with: 'center',
+    margin: 10,
     borderWidth: 1,
     padding: 10,
-    margin: 10,
-    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-export default LotsOfStyles;

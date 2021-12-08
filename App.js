@@ -1,21 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Button, View, TextInput, Text, SafeAreaView} from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+const xulydangnhap=()=>{
+  alert("Chuyen den trang dang nhap");
+};
+//onChangeText={(value)=>{this.setState({username:value})}}
+const App = () => (
+  <SafeAreaView style={styles.container}>
+    <View style={styles.view}>
+      <Text style={styles.text}>Log In</Text>
+      <TextInput style={styles.input}  placeholder="Username"/>
+      <TextInput style={styles.input}  placeholder="Password"/>
+      <Button style={styles.button} onPress={()=>{xulydangnhap()}} title="Log In"/>
     </View>
-  );
-}
+  </SafeAreaView>
+);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#DDDDDD',
+    height: '100%', 
+  },
+  view: {
+   margin: 'auto',
+   textAlign: 'center',
+   backgroundColor: 'white',
+   padding: '10%',
+  },
+  text: {
+    color: '#33CCFF',
+    padding: '10%',
+    fontSize: 40,
+  },
+  input:{
+    textAlign: 'center',
+    padding: '10%',
+  },
+  button: {
+
   },
 });
+
+export default App;

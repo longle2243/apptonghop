@@ -1,20 +1,24 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Button, View, TextInput, Text, SafeAreaView} from 'react-native';
 
-const xulydangnhap=()=>{
-  alert("Chuyen den trang dang nhap");
-};
-//onChangeText={(value)=>{this.setState({username:value})}}
-const App = () => (
+export default function App () {
+  const [username,setusername]=useState("");
+  const [password, setpassword] = useState("");  
+  const xulydangnhap=()=>{
+    alert(" username: "+username+" password: "+password);
+  };
+
+  return(
   <SafeAreaView style={styles.container}>
     <View style={styles.view}>
       <Text style={styles.text}>Log In</Text>
-      <TextInput style={styles.input}  placeholder="Username"/>
-      <TextInput style={styles.input}  placeholder="Password"/>
+      <TextInput style={styles.input} onChangeText={(username)=>setusername(username)} placeholder="Username"/>
+      <TextInput style={styles.input} onChangeText={(password)=>setpassword(password)} placeholder="Password"/>
       <Button style={styles.button} onPress={()=>{xulydangnhap()}} title="Log In"/>
     </View>
   </SafeAreaView>
-);
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -40,5 +44,3 @@ const styles = StyleSheet.create({
 
   },
 });
-
-export default App;

@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { styles } from "../styles/stylesheets";
-import { auth, onAuthStateChanged } from "../firebase";
-
+import {
+  ref,
+  set,
+  database,
+  auth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+} from "../firebase";
 export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [repeatPass, setRepeatPass] = useState();
+  const [confirmPassword, setRepeatPass] = useState();
   const [name, setName] = useState();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigation.replace("Login");
       }
@@ -19,13 +25,21 @@ export const RegisterScreen = ({ navigation }) => {
   }, []);
 
   const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered with ", user.email);
-      })
-      .catch((error) => alert(error.message));
+    if (password !== confirmPassword) {
+      alert("Mật khẩu không khớp");
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          console.log("Registered with ", user.email);
+
+          set(ref(database, "users/" + user.uid), {
+            username: name,
+            email: email,
+          });
+        })
+        .catch((error) => alert(error.message));
+    }
   };
 
   return (
@@ -53,7 +67,20 @@ export const RegisterScreen = ({ navigation }) => {
         placeholder="Nhập lại mật khẩu"
         onChangeText={(userRePass) => setRepeatPass(userRePass)}
       />
-      <Button title="Đăng ký" backgroundColor="blue" onPress={handleSignUp} />
+      <View
+        style={{
+          width: 300,
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Button title="Đăng ký" color="#841584" onPress={handleSignUp} />
+        <Button
+          title="Đăng nhập"
+          color="#841584"
+          onPress={() => navigation.replace("Login")}
+        />
+      </View>
     </View>
   );
 };

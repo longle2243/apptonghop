@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { styles } from "../styles/stylesheets";
-import { auth } from "../firebase";
+import {
+  auth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "../firebase";
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigation.replace("Home");
       }
@@ -16,8 +20,7 @@ export const LoginScreen = ({ navigation }) => {
   }, []);
 
   const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Login with ", user.email);
@@ -39,6 +42,13 @@ export const LoginScreen = ({ navigation }) => {
         onChangeText={(userPass) => setPassword(userPass)}
       />
       <Button title="Đăng nhập" backgroundColor="blue" onPress={handleLogin} />
+
+      <Text
+        style={{ color: "blue", marginTop: 15 }}
+        onPress={() => navigation.replace("Register")}
+      >
+        Đăng ký nếu chưa có tài khoản
+      </Text>
     </View>
   );
 };

@@ -14,7 +14,7 @@ export const HomeScreen = ({ navigation }) => {
 
   const dbRef = ref(database);
   let name;
-  await get(child(dbRef, `users/${auth.currentUser.uid}`))
+  get(child(dbRef, `users/${auth.currentUser.uid}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         name = snapshot.val().username;

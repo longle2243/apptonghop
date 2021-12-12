@@ -3,9 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, InputField, ErrorMessage } from "../components";
 import {
-  ref,
-  set,
-  database,
   auth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -46,10 +43,10 @@ export const RegisterScreen = ({ navigation }) => {
           const user = userCredentials.user;
           console.log("Registered with ", user.email);
 
-          set(ref(database, "users/" + user.uid), {
-            username: name,
-            email: email,
-          });
+          // set(ref(database, "users/" + user.uid), {
+          //   username: name,
+          //   email: email,
+          // });
         })
         .catch((error) => setSignupError(error.message));
     }

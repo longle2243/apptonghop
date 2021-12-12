@@ -7,13 +7,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { getDatabase, ref, set, get, child } from "firebase/database";
+// import { getDatabase, ref, set, get, child } from "firebase/database"; (realtime database)
 import Constants from "expo-constants";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "@firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: Constants.manifest.extra.apiKey,
   authDomain: Constants.manifest.extra.authDomain,
@@ -26,13 +23,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const database = getDatabase();
+// export const fdatabase = getDatabase(); // (realtime database)
+export const database = getFirestore();
 export const auth = getAuth();
 export {
-  ref,
-  set,
-  get,
-  child,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

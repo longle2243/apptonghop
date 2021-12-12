@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, View, Text, Button } from "react-native";
-import { auth, signOut, ref, child, get, database } from "../firebase";
+import { auth, signOut } from "../firebase";
 import { IconButton } from "../components";
 export const HomeScreen = ({ navigation }) => {
   const handleSignout = () => {

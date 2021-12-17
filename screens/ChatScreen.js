@@ -10,8 +10,9 @@ import {
 } from "firebase/firestore";
 import { signOut } from "@firebase/auth";
 import { auth, database } from "../firebase";
+
 export const ChatScreen = ({ navigation }) => {
-  const [message, setMessage] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   const onSignOut = () => {
     signOut(auth).catch((error) => console.log(error));
@@ -30,13 +31,13 @@ export const ChatScreen = ({ navigation }) => {
       },
     });
     const collectionRef = collection(database, "chats");
-    const q = query(collectionRef, orderBy("createAt", "desc"));
+    const q = query(collectionRef, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
-      setMessage(
+      setMessages(
         QuerySnapshot.docs.map((doc) => ({
           _id: doc.data()._id,
-          createAt: doc.data().createAt,
+          createdAt: doc.data().createdAt.toDate(),
           text: doc.data().text,
           user: doc.data().user,
         }))
@@ -45,15 +46,15 @@ export const ChatScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  const onSend = useCallback((message = []) => {
-    setMessage((previousMessages) =>
-      GiftedChat.append(previousMessages, message)
+  const onSend = useCallback((messages = []) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
     );
-    const { _id, createAt, text, user } = message[0];
+    const { _id, createdAt, text, user } = messages[0];
 
     addDoc(collection(database, "chats"), {
       _id,
-      createAt,
+      createdAt,
       text,
       user,
     });
@@ -61,13 +62,15 @@ export const ChatScreen = ({ navigation }) => {
 
   return (
     <GiftedChat
-      messages={message}
+      messages={messages}
       showAvatarForEveryMessage={true}
       onSend={(messages) => onSend(messages)}
       user={{
         _id: auth.currentUser?.email,
         avatar: "http://i.pravatar.cc/300",
       }}
+      alignTop={true}
+      scrollToBottom={true}
     />
   );
 };

@@ -60,7 +60,14 @@ export const HomeScreen = ({ navigation }) => {
             <Text style={styles.title}>TodoList</Text>
           </View>
           <View style={styles.boxContainer}>
-            <Text style={styles.title}>Quotes</Text>
+            <Text
+              style={styles.title}
+              onPress={() => {
+                navigation.navigate("Quote");
+              }}
+            >
+              Quotes
+            </Text>
           </View>
           <View style={styles.boxContainer}>
             <Text style={styles.title}>...</Text>

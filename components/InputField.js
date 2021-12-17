@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     fontSize: 18,
+    padding: 10,
   },
   rightIcon: {
     alignSelf: "center",

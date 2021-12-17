@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons";
 const Task = (props) => {
   return (
     <View style={styles.taskWrapper}>
-      <TouchableOpacity onPress={() => props.setChecked}>
+      <TouchableOpacity onPress={() => props.setChecked()}>
         <Icon
           name={props.checked ? "check" : "square"}
           size={30}

@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Task from "./Task";
 export const QuoteScreen = ({ navigation }) => {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
@@ -64,13 +63,29 @@ export const QuoteScreen = ({ navigation }) => {
       </View>
       <ScrollView>
         {todos.map((task) => (
-          <Task
-            text={task.text}
-            key={task.key}
-            checked={task.checked}
-            delete={() => handleDeletetodo(task.key)}
-            setChecked={() => handleCheckedTodo(task.key)}
-          />
+          <View style={styles.taskWrapper}>
+            <TouchableOpacity onPress={() => handleCheckedTodo(task.key)}>
+              <Icon
+                name={task.checked ? "check" : "square"}
+                size={30}
+                color="#900"
+                style={{ marginLeft: 15 }}
+              ></Icon>
+            </TouchableOpacity>
+            <View>
+              {/*  {neu co thi xuat hien neu khoong thi khong} */}
+              {task.checked && <View style={styles.verticalLine}></View>}
+
+              <Text style={styles.task}>{task.text}</Text>
+            </View>
+            <Icon
+              name="trash"
+              size={30}
+              color="#900"
+              style={{ marginLeft: "auto" }}
+              onPress={() => handleDeletetodo(task.key)}
+            ></Icon>
+          </View>
         ))}
       </ScrollView>
     </ImageBackground>
@@ -100,5 +115,31 @@ const styles = StyleSheet.create({
     color: "white",
     paddingLeft: 10,
     flex: 1,
+  },
+  taskWrapper: {
+    marginTop: "5%",
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#ffffff",
+    borderBottomWidth: 1.5,
+    width: "100%",
+    minHeight: 40,
+  },
+  task: {
+    paddingBottom: 20,
+    paddingLeft: 10,
+    marginTop: 6,
+    borderColor: "#F0F0F0",
+    fontSize: 17,
+    color: "white",
+    fontWeight: "bold",
+  },
+  verticalLine: {
+    borderBottomWidth: 4,
+    borderBottomColor: "white",
+    marginTop: 15,
+    marginLeft: 10,
+    width: "100%",
+    position: "absolute",
   },
 });

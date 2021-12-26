@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-export const QuoteScreen = ({ navigation }) => {
+export const TodoScreen = ({ navigation }) => {
   const [todos, setTodos] = useState([]);
   const [value, setValue] = useState("");
   const handleAddTodo = () => {

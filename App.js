@@ -7,7 +7,7 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { RegisterScreen } from "./screens/RegisterScreen";
 import { LoginScreen } from "./screens/LoginScreen";
 import { ChatScreen } from "./screens/ChatScreen";
-import { QuoteScreen } from "./screens/QuoteScreen";
+import { TodoScreen } from "./screens/TodoScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
           options={{ headerShown: true }}
         />
         <Stack.Screen
-          name="Quote"
-          component={QuoteScreen}
+          name="Todo"
+          component={TodoScreen}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>
